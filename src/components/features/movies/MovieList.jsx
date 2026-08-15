@@ -69,7 +69,7 @@ const MovieList = ({
           // always reset error before fetching data
           setErrorMessage("");
           const result = await fetch(
-            `http://www.omdbapi.com/?apikey=${KEY}&s=${query}
+            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}
              `,
             { signal: controller.signal },
           );
