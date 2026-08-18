@@ -99,15 +99,6 @@ The watched list is automatically persisted in `localStorage`, so your data surv
 ### 🔢 Rating Decision Counter
 - A hidden `useRef` counter tracks how many times a user changed their rating before adding a movie, stored as `countRatingDecisions` on the watched movie object
 
----
-
-## Demo
-
-| Search Movies | Movie Details & Rating | Watched Summary |
-|:---:|:---:|:---:|
-| <img src="https://via.placeholder.com/300x200?text=Search+Screenshot" alt="Search Movies Demo" /> | <img src="https://via.placeholder.com/300x200?text=Details+Screenshot" alt="Movie Details Demo" /> | <img src="https://via.placeholder.com/300x200?text=Summary+Screenshot" alt="Watched Summary Demo" /> |
-
-*(Note: Replace the placeholder image URLs above with actual paths to your screenshots, e.g., `./public/assets/demo-search.png`)*
 
 ---
 
