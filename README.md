@@ -1,18 +1,12 @@
 
 ```markdown
-<div align="center">
+# 🍿 usePopcorn — Movie Search & Personal Watchlist Application
 
-# 🍿 usePopcorn
-
-**A feature-rich movie search and personal watchlist application built with React.**
-
-Search any movie, explore detailed information, rate it with an interactive star system, and build your personal watched-movies collection — all persisted in your browser.
+Search any **movie**, explore detailed information, rate it with an interactive star system, and build your personal watched-movies collection — all in one sleek, React-powered web application.
 
 [![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](#license)
-
-</div>
 
 ---
 
