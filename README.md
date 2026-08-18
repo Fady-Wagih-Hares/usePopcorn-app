@@ -1,5 +1,5 @@
 
-```markdown
+
 # 🍿 usePopcorn — Movie Search & Personal Watchlist Application
 
 Search any **movie**, explore detailed information, rate it with an interactive star system, and build your personal watched-movies collection — all in one sleek, React-powered web application.
