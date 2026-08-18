@@ -1,4 +1,6 @@
-<![CDATA[<div align="center">
+
+```markdown
+<div align="center">
 
 # 🍿 usePopcorn
 
@@ -6,8 +8,8 @@
 
 Search any movie, explore detailed information, rate it with an interactive star system, and build your personal watched-movies collection — all persisted in your browser.
 
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](#license)
 
 </div>
@@ -45,7 +47,7 @@ The watched list is automatically persisted in `localStorage`, so your data surv
 
 ### 🔍 Movie Search
 - Real-time search powered by the **OMDb API**
-- Debounced fetching — requests fire only after typing **3+ characters**
+- **Debounced fetching** (requests wait until the user stops typing) and validation (fires only after typing **3+ characters**)
 - **AbortController** integration cancels in-flight requests when the user types a new query, preventing race conditions
 - Displays movie poster, title, and release year in the search results
 
@@ -109,7 +111,9 @@ The watched list is automatically persisted in `localStorage`, so your data surv
 
 | Search Movies | Movie Details & Rating | Watched Summary |
 |:---:|:---:|:---:|
-| Search by title and browse results | View full details and rate with stars | Track your collection with statistics |
+| <img src="https://via.placeholder.com/300x200?text=Search+Screenshot" alt="Search Movies Demo" /> | <img src="https://via.placeholder.com/300x200?text=Details+Screenshot" alt="Movie Details Demo" /> | <img src="https://via.placeholder.com/300x200?text=Summary+Screenshot" alt="Watched Summary Demo" /> |
+
+*(Note: Replace the placeholder image URLs above with actual paths to your screenshots, e.g., `./public/assets/demo-search.png`)*
 
 ---
 
@@ -117,19 +121,19 @@ The watched list is automatically persisted in `localStorage`, so your data surv
 
 | Technology | Version | Purpose |
 |---|---|---|
-| **React** | 19.2 | UI library (functional components, hooks) |
-| **Vite** | 8.1 | Build tool & dev server |
+| **React** | 18.2 | UI library (functional components, hooks) |
+| **Vite** | 5.0 | Build tool & dev server |
 | **react-icons** | 5.7 | Star rating icons (`FaStar`, `CiStar`) |
 | **prop-types** | 15.8 | Runtime prop type validation |
 | **sweetalert2** | 11.26 | Alert dialogs (available, currently commented out) |
-| **ESLint** | 10.6 | Code linting with React hooks plugin |
+| **ESLint** | 8.x | Code linting with React hooks plugin |
 | **OMDb API** | — | External movie data provider |
 
 ---
 
 ## Project Structure
 
-```
+```text
 usepopcorn/
 ├── public/
 │   ├── assets/
@@ -165,12 +169,15 @@ usepopcorn/
 │   └── main.jsx                          # React entry point (StrictMode)
 ├── config.js                             # App-wide constants (default poster URL)
 ├── .env                                  # API key (VITE_API_KEY) — git-ignored
+├── .env.example                          # Example environment variables template
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html                            # HTML shell
+├── LICENSE                               # MIT License
 ├── package.json
 ├── vite.config.js
 └── README.md
+
 ```
 
 ---
@@ -179,45 +186,55 @@ usepopcorn/
 
 ### Prerequisites
 
-- **Node.js** ≥ 18.x
-- **npm** ≥ 9.x
-- An **OMDb API key** — get one free at [omdbapi.com](https://www.omdbapi.com/apikey.aspx)
+* **Node.js** ≥ 18.x
+* **npm** ≥ 9.x
+* An **OMDb API key** — get one free at [omdbapi.com](https://www.omdbapi.com/apikey.aspx)
 
 ### Installation
 
 1. **Clone the repository**
+```bash
+git clone [https://github.com/Fady-Wagih-Hares/usePopcorn-app.git](https://github.com/Fady-Wagih-Hares/usePopcorn-app.git)
+cd usePopcorn-app
 
-   ```bash
-   git clone https://github.com/Fady-Wagih-Hares/usePopcorn-app.git
-   cd usePopcorn-app
-   ```
+```
+
 
 2. **Install dependencies**
+```bash
+npm install
 
-   ```bash
-   npm install
-   ```
+```
+
 
 3. **Configure environment variables**
+Copy the `.env.example` file to create a new `.env` file in the project root:
+```bash
+cp .env.example .env
 
-   Create a `.env` file in the project root:
+```
 
-   ```env
-   VITE_API_KEY=your_omdb_api_key_here
-   ```
+
+Then open `.env` and add your API key:
+```env
+VITE_API_KEY=your_omdb_api_key_here
+
+```
+
 
 4. **Start the development server**
+```bash
+npm run dev
 
-   ```bash
-   npm run dev
-   ```
+```
 
-   The app will be available at `http://localhost:5173` (default Vite port).
+
+The app will be available at `http://localhost:5173` (default Vite port).
 
 ### Available Scripts
 
 | Script | Command | Description |
-|---|---|---|
+| --- | --- | --- |
 | **dev** | `npm run dev` | Start Vite dev server with HMR |
 | **build** | `npm run build` | Build production bundle to `dist/` |
 | **preview** | `npm run preview` | Preview production build locally |
@@ -228,32 +245,36 @@ usepopcorn/
 ## Environment Variables
 
 | Variable | Required | Description |
-|---|---|---|
+| --- | --- | --- |
 | `VITE_API_KEY` | ✅ Yes | Your OMDb API key used to fetch movie data |
-
-
 
 ---
 
 ## Architecture & Design Patterns
 
 ### Component Composition
+
 The app favors **component composition** over prop drilling. Layout components like `SearchBar`, `Main`, and `Box` accept `children` props, allowing flexible, declarative content injection without deeply passing props through the tree.
 
 ### Custom Hooks for Reusability
+
 All reusable stateful logic is extracted into **custom hooks**:
-- `useMovies` — encapsulates the entire search-fetch-abort lifecycle
-- `useLocalStorageState` — a drop-in `useState` replacement that auto-syncs with `localStorage`
-- `useKeyPress` — a declarative way to bind global keyboard shortcuts with automatic cleanup
+
+* `useMovies` — encapsulates the entire search-fetch-abort lifecycle
+* `useLocalStorageState` — a drop-in `useState` replacement that auto-syncs with `localStorage`
+* `useKeyPress` — a declarative way to bind global keyboard shortcuts with automatic cleanup
 
 ### AbortController for Race Conditions
+
 The `useMovies` hook creates a new `AbortController` on every query change. When the query changes before a response arrives, the previous request is **aborted** in the effect's cleanup function, preventing stale data from overriding fresh results.
 
 ### Refs for Non-Render Data
-- The `Search` component uses `useRef` to declaratively access the input DOM element for programmatic focus
-- `MovieDetails` uses `useRef` to track the number of rating decisions without triggering re-renders
+
+* The `Search` component uses `useRef` to declaratively access the input DOM element for programmatic focus
+* `MovieDetails` uses `useRef` to track the number of rating decisions without triggering re-renders
 
 ### Effect Cleanup
+
 All side effects that register event listeners or modify the document title include proper **cleanup functions** to prevent memory leaks and stale behavior on unmount or re-render.
 
 ---
@@ -263,7 +284,7 @@ All side effects that register event listeners or modify the document title incl
 ### Layout Components
 
 | Component | File | Description |
-|---|---|---|
+| --- | --- | --- |
 | `SearchBar` | `layout/SearchBar.jsx` | Top navigation bar — renders children in a responsive grid |
 | `Logo` | `layout/Logo.jsx` | App branding with 🍿 emoji and "usePopcorn" title |
 | `NumResult` | `layout/NumResult.jsx` | Displays the count of search results found |
@@ -272,7 +293,7 @@ All side effects that register event listeners or modify the document title incl
 ### UI Components
 
 | Component | File | Description |
-|---|---|---|
+| --- | --- | --- |
 | `Box` | `ui/Box.jsx` | Collapsible container with toggle button (`+`/`–`) |
 | `StarRating` | `ui/StarRating.jsx` | Configurable star rating with hover preview & PropTypes |
 | `Star` | `ui/Star.jsx` | Single star icon with click/hover handlers |
@@ -282,7 +303,7 @@ All side effects that register event listeners or modify the document title incl
 ### Feature Components
 
 | Component | File | Description |
-|---|---|---|
+| --- | --- | --- |
 | `Search` | `features/movies/Search.jsx` | Controlled search input with `useRef` focus & Enter key binding |
 | `MovieList` | `features/movies/MovieList.jsx` | Orchestrates loading, error, and movie list rendering |
 | `Movie` | `features/movies/Movie.jsx` | Individual movie card with poster fallback handling |
@@ -299,17 +320,18 @@ All side effects that register event listeners or modify the document title incl
 Handles the complete movie search lifecycle.
 
 | Parameter | Type | Description |
-|---|---|---|
+| --- | --- | --- |
 | `query` | `string` | Search query string |
 | `callback` | `function` | Optional callback invoked before each fetch |
 
 **Returns:** `{ movies, isLoading, errorMessage }`
 
 **Key behaviors:**
-- Skips fetch if query is shorter than 3 characters
-- Creates an `AbortController` per request cycle
-- Cleans up (aborts) the previous request on re-render
-- Differentiates between abort errors and real errors
+
+* Skips fetch if query is shorter than 3 characters
+* Creates an `AbortController` per request cycle
+* Cleans up (aborts) the previous request on re-render
+* Differentiates between abort errors and real errors
 
 ---
 
@@ -318,15 +340,16 @@ Handles the complete movie search lifecycle.
 A `useState` replacement that persists state to `localStorage`.
 
 | Parameter | Type | Description |
-|---|---|---|
+| --- | --- | --- |
 | `initialState` | `any` | Fallback value if nothing is stored |
 | `key` | `string` | The `localStorage` key to read/write |
 
 **Returns:** `[value, setValue]` — same API as `useState`
 
 **Key behaviors:**
-- Uses a **lazy initializer** to read from `localStorage` only on mount
-- Syncs to `localStorage` via `useEffect` on every state change
+
+* Uses a **lazy initializer** to read from `localStorage` only on mount
+* Syncs to `localStorage` via `useEffect` on every state change
 
 ---
 
@@ -335,20 +358,21 @@ A `useState` replacement that persists state to `localStorage`.
 Registers a global `keydown` event listener for a specific key.
 
 | Parameter | Type | Description |
-|---|---|---|
+| --- | --- | --- |
 | `key` | `string` | The `event.code` to listen for (case-insensitive) |
 | `action` | `function` | Callback to invoke on key press |
 
 **Key behaviors:**
-- Automatically cleans up the event listener on unmount or dependency change
-- Case-insensitive key matching
+
+* Automatically cleans up the event listener on unmount or dependency change
+* Case-insensitive key matching
 
 ---
 
 ## Keyboard Shortcuts
 
 | Key | Context | Action |
-|---|---|---|
+| --- | --- | --- |
 | `Enter` | Anywhere | Focuses the search input and clears the query |
 | `Escape` | Movie details open | Closes the movie details panel |
 
@@ -359,7 +383,7 @@ Registers a global `keydown` event listener for a specific key.
 The app uses **CSS media queries** with four breakpoint tiers:
 
 | Breakpoint | Target | Layout Changes |
-|---|---|---|
+| --- | --- | --- |
 | **Default** | Desktop (>900px) | Two-column side-by-side layout |
 | **≤ 900px** | Tablet | Columns stack vertically, boxes expand to 80% width |
 | **≤ 768px** | Mobile | Navbar switches to 2-column grid, search spans full width, boxes go 100% |
@@ -368,7 +392,7 @@ The app uses **CSS media queries** with four breakpoint tiers:
 ### Design System
 
 | Token | Value |
-|---|---|
+| --- | --- |
 | Primary | `#6741d9` |
 | Primary Light | `#7950f2` |
 | Text | `#dee2e6` |
@@ -403,7 +427,8 @@ Built as a capstone project from [Jonas Schmedtmann's The Ultimate React Course 
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
 
+```
 
-]]>
+```
