@@ -51,7 +51,7 @@ body {
 }
 
 .box {
-  width: 42rem;
+  width: 100%;
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
@@ -97,7 +97,8 @@ body {
   padding: 1.1rem 1.6rem;
   font-size: 1.8rem;
   border-radius: 0.7rem;
-  width: 40rem;
+  width: 100%;
+  max-width: 40rem;
   transition: all 0.3s;
   color: var(--color-text);
 
@@ -340,7 +341,74 @@ body {
   align-items: center;
   justify-content: center;
 }
+/* For Tablets (Screens smaller than 900px) */
+@media (max-width: 900px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+    height: auto; /* Remove fixed height constraint */
+  }
 
+  .box {
+    max-width: 80%; /* Let the box expand on tablet */
+    min-height: 50vh; /* Give lists a good height when stacked */
+  }
+
+  /* Allow the watched list to take up content height */
+  .list-watched {
+    height: auto;
+  }
+}
+
+/* For Mobile Phones (Screens smaller than 768px) */
+@media (max-width: 768px) {
+  .nav-bar {
+    grid-template-columns: 1fr 1fr; /* Drop to 2 columns */
+    grid-template-rows: auto auto; /* Add a second row for search */
+    height: auto;
+    padding: 1.6rem 2.4rem;
+    gap: 1.6rem;
+  }
+
+  .search {
+    grid-column: 1 / -1; /* Make search bar span the entire second row */
+    max-width: 100%; /* Allow full width on mobile */
+  }
+
+  .box {
+    max-width: 100%; /* Take full width on mobile */
+  }
+}
+
+/* For Small Mobile Phones (Screens smaller than 500px) */
+@media (max-width: 500px) {
+  body {
+    padding: 1.2rem; /* Reduce outer padding */
+  }
+
+  .logo span {
+    font-size: 2.4rem;
+  }
+
+  .logo h1 {
+    font-size: 1.8rem; /* Scale down logo text */
+  }
+
+  .details header {
+    flex-direction: column;
+  }
+
+  .details img {
+    width: 100%; /* Poster takes full width on small screens */
+    max-height: 35rem;
+    object-fit: cover;
+  }
+
+  .summary div {
+    flex-wrap: wrap; /* Allow summary text to wrap naturally */
+    gap: 1.2rem;
+  }
+}
 /*
 SPACING SYSTEM (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128
